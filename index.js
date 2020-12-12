@@ -20,7 +20,8 @@ app.use(morgan("dev"));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-//Primera ruta
+/*Primera ruta
+Todo lo que va despues del .com*/
 app.use("/api", apiRouter);
 
 app.set("port", 3000);

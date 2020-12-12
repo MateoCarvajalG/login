@@ -1,5 +1,6 @@
+const User = require("../models");
 const models = require("../models");
-const bcrypt = require("bcrypt");
+const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 
 exports.login = async (req, res, next) => {
@@ -16,28 +17,28 @@ exports.login = async (req, res, next) => {
         const token = jwt.sign(
           {
             id: user.id,
-            name: user.name,
+            name: user.username,
             email: user.email,
+            rol: user.rol,
           },
           "config.secret",
           {
             expires: 86400, //24 horas
           }
         );
-        res.status(200).send({ auth: true, accessToken: token, user: user });
+        res.status(200).send({ auth: true, tokenReturn: token, user: user });
       } else {
-        res.json({
+        res.status(401).json({
           error: "Error en usuario o contraseña",
         });
       }
     } else {
-      res.json({ error: "Error en usuario o contraseña" });
+      res.status(404).json({ error: "Error en usuario o contraseña" });
     }
   } catch (error) {
-    res.startus(500),
-      send({
-        message: "Error!!",
-      });
+    res.startus(500).send({
+      message: "Error --> ",
+    });
     next(e);
   }
 };
