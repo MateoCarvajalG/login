@@ -1,0 +1,3 @@
+conexion a base de datos
+user:       qLLo4hnsyc
+password:   yc0jjAQ4yb
